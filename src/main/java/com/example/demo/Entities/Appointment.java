@@ -2,7 +2,7 @@ package com.example.demo.Entities;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
+import java.util.*;
 
 
 @Entity
@@ -10,17 +10,18 @@ import java.sql.Timestamp;
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "appointmentID", unique = true, nullable = false)
+    @Column(name = "appointmentID")
     private Integer appointmentID;
 
+    //TODO - get rid of unique and nullable
     @Column(name = "apptStatus", unique=false,nullable = false)
     private String apptStatus;
 
     @Column(name = "apptStartDateTime", unique = false, nullable = false)
-    private java.sql.Timestamp apptStartDateTime;
+    private java.util.Date apptStartDateTime;
 
     @Column(name = "apptEndDateTime", unique = false, nullable = false)
-    private java.sql.Timestamp apptEndDateTime;
+    private java.util.Date apptEndDateTime;
 
     @Column(name = "roomNum", unique = false, nullable = false)
     private Integer roomNum;
@@ -28,6 +29,9 @@ public class Appointment {
     @Column(name = "visitReason", unique = false, nullable = false)
     private String visitReason;
 
+    //TODO - finish relationships
+//    @ManyToOne
+//    @JoinColumn
     /* Add Relationships:
         Appointment:Patient = N:1
             -> add FK referencing PATIENT.patientID
@@ -40,7 +44,7 @@ public class Appointment {
 
     /*BEGIN Constructors*/
     public Appointment(){}
-    public Appointment(Integer appointmentID, String apptStatus, Timestamp apptStartDateTime, Timestamp apptEndDateTime, Integer roomNum, String visitReason) {
+    public Appointment(Integer appointmentID, String apptStatus, Date apptStartDateTime, Date apptEndDateTime, Integer roomNum, String visitReason) {
         this.appointmentID = appointmentID;
         this.apptStatus = apptStatus;
         this.apptStartDateTime = apptStartDateTime;
@@ -52,7 +56,7 @@ public class Appointment {
     /*END Constructors*/
 
     /*BEGIN Getters and Setters*/
-    //TODO - Figure out if a setter is needed for apptID
+    //TODO - Figure out if a setter is needed for apptID : YES
     public Integer getAppointmentID() {
         return appointmentID;
     }
@@ -69,19 +73,19 @@ public class Appointment {
         this.apptStatus = apptStatus;
     }
 
-    public Timestamp getApptStartDateTime() {
+    public Date getApptStartDateTime() {
         return apptStartDateTime;
     }
 
-    public void setApptStartDateTime(Timestamp apptStartDateTime) {
+    public void setApptStartDateTime(Date apptStartDateTime) {
         this.apptStartDateTime = apptStartDateTime;
     }
 
-    public Timestamp getApptEndDateTime() {
+    public Date getApptEndDateTime() {
         return apptEndDateTime;
     }
 
-    public void setApptEndDateTime(Timestamp apptEndDateTime) {
+    public void setApptEndDateTime(Date apptEndDateTime) {
         this.apptEndDateTime = apptEndDateTime;
     }
 

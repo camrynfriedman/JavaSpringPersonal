@@ -10,7 +10,6 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "personID", unique = true, nullable = false)
     private Integer personID;
-
     @Column(name = "fName", unique = false, nullable = false)
     private String fName;
     @Column(name = "lName", unique = false, nullable = false)
