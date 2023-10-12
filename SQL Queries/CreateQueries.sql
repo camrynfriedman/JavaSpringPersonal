@@ -1,12 +1,12 @@
-USE JavaSpringAPI GO
+USE [DoctorAppointmentManagement];
 CREATE TABLE PERSON
 (
     personID INT NOT NULL IDENTITY(1, 1),
     fName NVARCHAR(255) NOT NULL,
     lName NVARCHAR(255) NOT NULL,
-	SSN NVARCHAR(9) NOT NULL,
+	SSN NCHAR(11) NOT NULL,
     DOB DATE NOT NULL,
-    phoneNum CHAR(10) NOT NULL,
+    phoneNum NCHAR(12) NOT NULL,
     emailAddress NVARCHAR(255) NOT NULL,
     PRIMARY KEY (personID)
 );

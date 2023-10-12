@@ -1,14 +1,17 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.DTOs.AppointmentDTO;
 import com.example.demo.Entities.Appointment;
-import com.example.demo.Repositories.AppointmentRepository;
 import com.example.demo.Services.AppointmentService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.*;
+
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @RestController
-//TODO - figure out if I need a requestMapping annotation here
 public class AppointmentController {
 
     public AppointmentService _apptService;
@@ -17,16 +20,22 @@ public class AppointmentController {
         _apptService = apptService;
     }
 
-    @GetMapping(value="/appointments")
-    public List<Appointment> getAllAppointments(){
-       return _apptService.findAll();
+    @GetMapping(value = "/api/appointments")
+    public CompletableFuture<List<AppointmentDTO>> getAllAppointments() {
+        return _apptService.findAll();
     }
 
-    @GetMapping(value="/appointments/{id}")
-    public Appointment getAppointment(@PathVariable("id") int appointmentID){
-        return _apptService.findByID(appointmentID);
+    @GetMapping(value = "/api/appointments/{id}")
+    public Appointment getAppointment(@PathVariable("id") int appointmentID) throws ExecutionException, InterruptedException {
+        CompletableFuture<Appointment> future = _apptService.findByID(appointmentID);
+        return future.get();
+    }
+
+    @GetMapping(value="/api/appointments/status/{apptStatus}")
+    public CompletableFuture<List<AppointmentDTO>> getAppointmentsByStatus(@PathVariable("apptStatus") String apptStatus){
+        return _apptService.findByApptStatus(apptStatus);
     }
 }
 
-//POST and PUT
+//TODO - POST and PUT
 //http://localhost:8080/appointments

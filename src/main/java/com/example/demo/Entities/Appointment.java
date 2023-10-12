@@ -2,9 +2,9 @@ package com.example.demo.Entities;
 
 import jakarta.persistence.*;
 
-import java.util.*;
+import java.util.Date;
 
-
+//TODO - implement doctor and patient relationships
 @Entity
 @Table(name = "APPOINTMENT")
 public class Appointment {
@@ -13,50 +13,47 @@ public class Appointment {
     @Column(name = "appointmentID")
     private Integer appointmentID;
 
-    //TODO - get rid of unique and nullable
-    @Column(name = "apptStatus", unique=false,nullable = false)
+    @Column(name = "apptStatus")
     private String apptStatus;
 
-    @Column(name = "apptStartDateTime", unique = false, nullable = false)
+    @Column(name = "apptStartDateTime")
     private java.util.Date apptStartDateTime;
 
-    @Column(name = "apptEndDateTime", unique = false, nullable = false)
+    @Column(name = "apptEndDateTime")
     private java.util.Date apptEndDateTime;
 
-    @Column(name = "roomNum", unique = false, nullable = false)
+    @Column(name = "roomNum")
     private Integer roomNum;
 
-    @Column(name = "visitReason", unique = false, nullable = false)
+    @Column(name = "visitReason")
     private String visitReason;
 
-    //TODO - finish relationships
-//    @ManyToOne
-//    @JoinColumn
-    /* Add Relationships:
-        Appointment:Patient = N:1
-            -> add FK referencing PATIENT.patientID
-        Appointment:Doctor = N:1
-            -> add FK referencing DOCTOR.doctorID
+    @ManyToOne
+    @JoinColumn(name="doctorID")
+    private Doctor doctor;
 
-    Unidirectional relationship: when we delete an appointment, it doesn't delete a patient
-    Likewise, when we delete an appointment, it doesn't delete a doctor
-     */
+    @ManyToOne
+    @JoinColumn(name="patientID")
+    private Patient patient;
 
     /*BEGIN Constructors*/
-    public Appointment(){}
-    public Appointment(Integer appointmentID, String apptStatus, Date apptStartDateTime, Date apptEndDateTime, Integer roomNum, String visitReason) {
+    public Appointment() {
+    }
+
+    public Appointment(Integer appointmentID, String apptStatus, Date apptStartDateTime, Date apptEndDateTime, Integer roomNum, String visitReason, Doctor doctor, Patient patient) {
         this.appointmentID = appointmentID;
         this.apptStatus = apptStatus;
         this.apptStartDateTime = apptStartDateTime;
         this.apptEndDateTime = apptEndDateTime;
         this.roomNum = roomNum;
         this.visitReason = visitReason;
+        this.doctor=doctor;
+        this.patient=patient;
     }
 
     /*END Constructors*/
 
     /*BEGIN Getters and Setters*/
-    //TODO - Figure out if a setter is needed for apptID : YES
     public Integer getAppointmentID() {
         return appointmentID;
     }
@@ -104,6 +101,12 @@ public class Appointment {
     public void setVisitReason(String visitReason) {
         this.visitReason = visitReason;
     }
+
+    public Doctor getDoctor() {return doctor;}
+    public void setDoctor(Doctor doctor){this.doctor=doctor;}
+
+    public Patient getPatient() {return patient;}
+    public void setPatient(Patient patient){this.patient=patient;}
     /*END Getters and Setters*/
 
 }

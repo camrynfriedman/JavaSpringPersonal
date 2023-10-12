@@ -1,24 +1,28 @@
 package com.example.demo.Entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+//TODO - implement relationships (won says no I say yes)
 @Entity
 @Table(name = "PATIENT")
-public class Patient extends Person {
-    //TODO- figure out how to have patientID as a FK to personID
+public class Patient {
     @Id
-    @Column(name = "patientID", unique = true, nullable = false)
+    @Column(name = "patientID")
     private Integer patientID;
-    @Column(name = "weight", unique = false, nullable = false)
+    @Column(name = "weight")
     private float weight;
-    @Column(name = "height", unique = false, nullable = false)
+    @Column(name = "height")
     private float height;
-    @Column(name = "bloodType", unique = false, nullable = false)
+    @Column(name = "bloodType")
     private String bloodType;
-    @Column(name = "insuranceCompany", unique = false, nullable = false)
+    @Column(name = "insuranceCompany")
     private String insuranceCompany;
 
-
+//    @OneToMany(mappedBy = "patient")
+//    private List<Appointment> appointments;
 /*    //Relationships
 
     //Patient:Appointment = 1:M
@@ -30,12 +34,14 @@ public class Patient extends Person {
     public Patient() {
 
     }
+
     public Patient(Integer patientID, float weight, float height, String bloodType, String insuranceCompany) {
         this.patientID = patientID;
         this.weight = weight;
         this.height = height;
         this.bloodType = bloodType;
         this.insuranceCompany = insuranceCompany;
+//        this.appointments = appointments;
     }
     /*END Constructors*/
 
