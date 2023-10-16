@@ -63,14 +63,35 @@ public class AppointmentService {
         return CompletableFuture.completedFuture(dtoList);
     }
 
-    //TODO - post method (save)
     @Async
     public CompletableFuture<Appointment> createAppt(Appointment appt){
         return CompletableFuture.completedFuture(_apptRepo.save(appt));
     }
 
     //TODO - put (get record, update it, save it)
+    @Async
+    public CompletableFuture<Appointment> updateAppt(Integer apptID, Appointment updatesAppt){
+            //get record
+            Optional<Appointment> apptOp = _apptRepo.findById(apptID);
+            if (apptOp.isPresent()){
+                //convert Optional<appointment> to just Appointment
+                Appointment appt = apptOp.get();
+                //update record
+                appt.setAppointmentID(updatesAppt.getAppointmentID());
+                appt.setApptStatus(updatesAppt.getApptStatus());
+                appt.setApptStartDateTime(updatesAppt.getApptStartDateTime());
+                appt.setApptEndDateTime(updatesAppt.getApptEndDateTime());
+                appt.setRoomNum(updatesAppt.getRoomNum());
+                appt.setVisitReason(updatesAppt.getVisitReason());
+                appt.setDoctor(updatesAppt.getDoctor());
+                appt.setPatient(updatesAppt.getPatient());
+                //save record
+                _apptRepo.save(appt);
+                return CompletableFuture.completedFuture(appt);
+            }
+            return CompletableFuture.completedFuture(null);
 
+    }
 }
 //USE MAP-REDUCE TO CONVERT ENTITIES TO DTOs
 //USE ASYNC

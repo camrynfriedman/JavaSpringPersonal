@@ -34,10 +34,14 @@ public class AppointmentController {
         return _apptService.findByApptStatus(apptStatus);
     }
 
-
     @PostMapping(value = "/api/appointments")
     public CompletableFuture<Appointment> postAppt(@RequestBody Appointment appt){
         return _apptService.createAppt(appt);
+    }
+
+    @PutMapping(value="/api/appointments/{id}")
+    public CompletableFuture<Appointment> putAppt(@PathVariable("id") Integer apptID, @RequestBody Appointment appt){
+        return _apptService.updateAppt(apptID, appt);
     }
 }
 
