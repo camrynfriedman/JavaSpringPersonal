@@ -40,8 +40,8 @@ public class AppointmentDTO {
         this.apptEndDateTime = apptEndDateTime;
         this.roomNum = roomNum;
         this.visitReason = visitReason;
-            this.doctor = doctor;
-            this.patient=patient;
+        this.doctor = doctor;
+        this.patient=patient;
     }
     /*END Constructors*/
 

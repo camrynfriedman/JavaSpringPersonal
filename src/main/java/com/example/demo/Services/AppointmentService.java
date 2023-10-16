@@ -64,6 +64,10 @@ public class AppointmentService {
     }
 
     //TODO - post method (save)
+    @Async
+    public CompletableFuture<Appointment> createAppt(Appointment appt){
+        return CompletableFuture.completedFuture(_apptRepo.save(appt));
+    }
 
     //TODO - put (get record, update it, save it)
 

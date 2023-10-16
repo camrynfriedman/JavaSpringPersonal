@@ -4,12 +4,11 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
-//TODO - implement doctor and patient relationships
 @Entity
 @Table(name = "APPOINTMENT")
 public class Appointment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "appointmentID")
     private Integer appointmentID;
 
@@ -36,20 +35,32 @@ public class Appointment {
     @JoinColumn(name="patientID")
     private Patient patient;
 
+    //figure out what to add to join column (you will get an error when post in postman)
+    //create JSON object with minimum elements and see what happens
+    /*
+    Column 'doctorID' is duplicated in mapping for entity 'com.example.demo.Entities.Appointment'
+    (use '@Column(insertable=false, updatable=false)' when mapping multiple properties to the same column)
+    */
+    @Column(name="patientID", insertable = false, updatable = false)
+    private Integer patientID;
+    @Column(name="doctorID", insertable = false,updatable = false)
+    private Integer doctorID;
+
     /*BEGIN Constructors*/
     public Appointment() {
     }
 
-    public Appointment(Integer appointmentID, String apptStatus, Date apptStartDateTime, Date apptEndDateTime, Integer roomNum, String visitReason, Doctor doctor, Patient patient) {
-        this.appointmentID = appointmentID;
-        this.apptStatus = apptStatus;
-        this.apptStartDateTime = apptStartDateTime;
-        this.apptEndDateTime = apptEndDateTime;
-        this.roomNum = roomNum;
-        this.visitReason = visitReason;
-        this.doctor=doctor;
-        this.patient=patient;
-    }
+//    public Appointment(Integer appointmentID, String apptStatus, Date apptStartDateTime, Date apptEndDateTime, Integer roomNum, String visitReason, Doctor doctor, Patient patient) {
+//        this.appointmentID = appointmentID;
+//        this.apptStatus = apptStatus;
+//        this.apptStartDateTime = apptStartDateTime;
+//        this.apptEndDateTime = apptEndDateTime;
+//        this.roomNum = roomNum;
+//        this.visitReason = visitReason;
+//        this.doctor=doctor;
+//        this.patient=patient;
+//
+//    }
 
     /*END Constructors*/
 

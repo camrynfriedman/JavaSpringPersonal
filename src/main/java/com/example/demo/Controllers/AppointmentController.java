@@ -3,9 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.DTOs.AppointmentDTO;
 import com.example.demo.Entities.Appointment;
 import com.example.demo.Services.AppointmentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -34,6 +32,12 @@ public class AppointmentController {
     @GetMapping(value="/api/appointments/status/{apptStatus}")
     public CompletableFuture<List<AppointmentDTO>> getAppointmentsByStatus(@PathVariable("apptStatus") String apptStatus){
         return _apptService.findByApptStatus(apptStatus);
+    }
+
+
+    @PostMapping(value = "/api/appointments")
+    public CompletableFuture<Appointment> postAppt(@RequestBody Appointment appt){
+        return _apptService.createAppt(appt);
     }
 }
 

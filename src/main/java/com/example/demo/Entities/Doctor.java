@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "DOCTOR")
 public class Doctor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "doctorID")
     private Integer doctorID;
 
@@ -16,7 +15,6 @@ public class Doctor {
     @Column(name = "specialty")
     private String specialty;
 
-    //TODO - implement relationships
 //    @OneToMany(mappedBy = "doctor")
 //    private List<Appointment> appointments;
 

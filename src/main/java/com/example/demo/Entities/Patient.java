@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-//TODO - implement relationships (won says no I say yes)
 @Entity
 @Table(name = "PATIENT")
 public class Patient {
